@@ -27,7 +27,7 @@ export default {
   box-sizing: border-box;
 }
 #app {
-  width: 97%;
+  width: 100%;
 }
 body {
   display: flex;
@@ -35,7 +35,7 @@ body {
   justify-content: center;
 }
 main {
-  width: 97%;
-  height: 65vh;
+  width: 100%;
+  height: 70vh;
 }
 </style>
