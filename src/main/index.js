@@ -1,7 +1,9 @@
 import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import path, { join } from 'path';
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
-//import icon from '../../resources/icon.png?asset'
+import Installation from './Installation/Installation';
+
+const installer = new Installation()
 
 const icon = path.join(__dirname, '../../resources/icon.ico')
 
@@ -53,8 +55,23 @@ app.whenReady().then(() => {
     optimizer.watchWindowShortcuts(window)
   })
 
-  // IPC test
-  ipcMain.on('ping', () => console.log('pong'))
+  // IPC methods
+  ipcMain.handle('install-dotnet5', async () => {
+      return await installer.installDotNet5()
+  })
+
+  ipcMain.handle('install-dotnet8', async () => {
+      return await installer.installDotNet8()
+  })
+
+  ipcMain.handle('install-cristal32', async () => {
+      return await installer.installCristal32Bits()
+  })
+
+  ipcMain.handle('install-cristal64', async () => {
+      return await installer.installCristal64Bits()
+  })
+  
 
   createWindow()
 

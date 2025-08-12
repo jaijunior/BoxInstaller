@@ -1,12 +1,15 @@
-import { contextBridge } from 'electron'
+import { contextBridge, ipcRenderer } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
 
-// Custom APIs for renderer
-const api = {}
+// 📌 APIs personalizadas para chamar o IPC de instalação
+const api = {
+  installDotNet5: () => ipcRenderer.invoke('install-dotnet5'),
+  installDotNet8: () => ipcRenderer.invoke('install-dotnet8'),
+  installCristal32: () => ipcRenderer.invoke('install-cristal32'),
+  installCristal64: () => ipcRenderer.invoke('install-cristal64')
+}
 
-// Use `contextBridge` APIs to expose Electron APIs to
-// renderer only if context isolation is enabled, otherwise
-// just add to the DOM global.
+// Mantém a compatibilidade com o electronAPI padrão
 if (process.contextIsolated) {
   try {
     contextBridge.exposeInMainWorld('electron', electronAPI)

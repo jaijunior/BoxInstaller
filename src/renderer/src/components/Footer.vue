@@ -29,8 +29,9 @@ export default {
     data() {
         return {
             processHandle: {
-                1:"/",
-                2:"SelectInstallationMethod"
+                1: "/",
+                2: "SelectInstallationMethod",
+                3: "Endind"
             }
         }
     },
@@ -57,7 +58,7 @@ export default {
                     console.log("NULL")
             }
         },
-        async cancelInstallation () {
+        async cancelInstallation() {
             const alert = new Alert()
             await alert.standartAlert("Cancelar", "TODO: Necessario criar junto com IPC")
         }
